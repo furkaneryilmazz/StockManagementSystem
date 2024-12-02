@@ -16,9 +16,16 @@ namespace StockManagementSystem.WebUI.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, int pageSize = 5)
         {
-            var stockTypes = _stockTypeService.GetAll();
+            var stockTypes = _stockTypeService.GetAll().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var totalRecords = _stockTypeService.GetAll().Count();
+            var totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalRecords = totalRecords;
+
             return View(stockTypes);
         }
 

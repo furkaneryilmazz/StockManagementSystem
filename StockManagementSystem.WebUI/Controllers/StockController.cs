@@ -20,9 +20,21 @@ namespace StockManagementSystem.WebUI.Controllers
             _stockTypeService = stockTypeService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, int pageSize = 5)
         {
-            var stocks = _stockService.GetAll();
+            //sayfalama için verileri al burda
+            var stocks = _stockService.GetAll().Skip((page -1)*pageSize).Take(pageSize).ToList();
+            //toplam kayıt sayısını al
+            var totalRecords = _stockService.GetAll().Count();
+            //sayfa sayısını hesapla
+            var totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+            //sayfa numaralarını ve verilere view'a göndericez
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalRecords = totalRecords;
+
+
             ViewBag.GetStockClass = GetStockClass();
             ViewBag.GetUnitCode = GetUnitCode();
             ViewBag.GetStockType = GetStockType();
