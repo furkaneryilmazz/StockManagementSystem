@@ -1,0 +1,52 @@
+﻿@model List<StockUnit>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Birim Kodu</th>
+        <th>Stok Türü</th>
+        <th>Miktar Birimi</th>
+        <th>Açıklama</th>
+        <th>Alış Fiyatı</th>
+        <th></th>
+        <th>Satış Fiyatı</th>
+        <th></th>
+        <th>Kağıt Ağırlığı</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.StockUnitCode</td>
+                <td>@item.StockType?.StockTypeName</td>
+                <td>@item.StockQuantity?.QuantityUnit</td>
+                <td>@item.Description</td>
+                <td style="background-color:dodgerblue; color:aliceblue">@item.BuyingPrice</td>
+                <td>@item.CurrencyUnit.CurrencyUnitMoney ₺</td>
+                <td style="background-color:orange; color:black">@item.SalePrice</td>
+                <td>@item.CurrencyUnit.CurrencyUnitMoney ₺</td>
+                <td>@item.PaperWeight</td>
+                <td>@(item.IsActive == true ? "Aktif" : "Aktif Değil")</td>
+                <td><a href="/StockUnit/DeleteStockUnit/@item.Id" class="btn btn-danger">Sil</a></td>
+                <td><a href="/StockUnit/EditStockUnit/@item.Id" class="btn btn-success">Güncelle</a></td>
+            </tr>
+        }
+    }
+    else
+    {
+        <h1>Hiç Stok Birimi Verisi Yok veya Boş Geliyor</h1>
+    }
+</table>
+<a href="/StockUnit/CreateStockUnit/" class="btn btn-info">Stok Birimi Ekle</a>
+
+
+

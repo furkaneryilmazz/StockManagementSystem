@@ -1,0 +1,91 @@
+﻿@model StockUnit
+@{
+    ViewData["Title"] = "CreateStockUnit";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<!-- Modal Trigger Button -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stockUnitModal">
+    Stok Birim Ekle
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="stockUnitModal" tabindex="-1" role="dialog" aria-labelledby="stockUnitModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="stockUnitModalLabel">Stok Birim Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form Başlangıcı -->
+                <form asp-action="CreateStockUnit" method="post" id="stockUnitForm">
+                    <div class="form-group">
+                        <label for="Code">Stok Birim Kodu</label>
+                        <input asp-for="StockUnitCode" class="form-control" />
+                        <span asp-validation-for="StockUnitCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="StockTypeId">Stok Türü</label>
+                        <select asp-for="StockTypeId" asp-items="ViewBag.StockTypes" class="form-control">
+                            <option value="">-- Seçiniz --</option>
+                        </select>
+                        <span asp-validation-for="StockTypeId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="StockQuantityUnitId" class="control-label">Stok Miktar Birimi</label>
+                        <select asp-for="StockQuantityUnitId" class="form-control" asp-items="ViewBag.QuantityUnits"></select>
+                        <span asp-validation-for="StockQuantityUnitId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Description">Açıklama</label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="BuyingPrice">Alış Fiyatı</label>
+                        <input asp-for="BuyingPrice" class="form-control" />
+                        <span asp-validation-for="BuyingPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="CurrencyUnitId">Alış Fiyatı Para Birimi</label>
+                        <select asp-for="CurrencyUnitId" asp-items="ViewBag.CurrencyUnits" class="form-control">
+                            <option value="">-- Seçiniz --</option>
+                        </select>
+                        <span asp-validation-for="CurrencyUnitId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="SalePrice">Satış Fiyatı</label>
+                        <input asp-for="SalePrice" class="form-control" />
+                        <span asp-validation-for="SalePrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="CurrencyUnitId">Satış Fiyatı Para Birimi</label>
+                        <select asp-for="CurrencyUnitId" asp-items="ViewBag.CurrencyUnits" class="form-control">
+                            <option value="">-- Seçiniz --</option>
+                        </select>
+                        <span asp-validation-for="CurrencyUnitId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="PaperWeight">Kağıt Ağırlığı</label>
+                        <input asp-for="PaperWeight" class="form-control" />
+                        <span asp-validation-for="PaperWeight" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Aktif mi?</label>
+                        <input asp-for="IsActive" type="checkbox" class="form-check-input" />
+                    </div>
+                </form>
+                <!-- Form Sonu -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                <button type="submit" form="stockUnitForm" class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>

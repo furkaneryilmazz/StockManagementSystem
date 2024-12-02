@@ -1,0 +1,28 @@
+﻿@model List<StockType>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Stok Türü</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.StockTypeName</td>
+            <td>@(item.IsActive == true ? "Aktif" : "Aktif Değil")</td>
+            <td><a href="/StockType/DeleteStockType/@item.Id" class="btn btn-danger">Sil</a></td>
+            <td><a href="/StockType/EditStockType/@item.Id" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/StockType/CreateStockType/" class="btn btn-info">Stok Türü Ekle</a>
+
+

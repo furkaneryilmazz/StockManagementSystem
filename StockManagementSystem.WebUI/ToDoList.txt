@@ -1,0 +1,6 @@
+﻿-- AdminLayout Kontrol edilecek --yapıldı
+--Daha sonra geri kalan controller ve viewler yapılacak -- yapıldı
+
+--verilen fotoğraftaki entityler değiştirilecek ve veritabanı uptade edilecek -- yapıldı
+--create ve edit sayfaları modal olarak eklenecek --yapıldı
+-- daha sonra geri kalan son 3 madde yapılacak

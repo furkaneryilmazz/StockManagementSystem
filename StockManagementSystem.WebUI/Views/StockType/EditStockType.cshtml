@@ -1,0 +1,22 @@
+﻿@model StockType
+@{
+    ViewData["Title"] = "EditStockType";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+
+<form asp-action="EditStockType" method="post">
+    <input type="hidden" asp-for="Id"/>
+    <div class="form-group">
+        <label>Stok Türü</label>
+        <input asp-for="StockTypeName" class="form-control"/>
+        <span asp-validation-for="StockTypeName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Aktiflik</label>
+        <input asp-for="IsActive" type="checkbox" class="form-check-input"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+    <a asp-action="Index" class="btn btn-secondary">Ana Sayfaya Dön</a>
+</form>
+

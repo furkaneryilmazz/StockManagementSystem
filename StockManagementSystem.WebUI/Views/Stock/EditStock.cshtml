@@ -1,0 +1,75 @@
+﻿@model Stock
+@{
+    ViewData["Title"] = "EditStock";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+<!-- Button to trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createStockModal">
+    Stok Güncelle
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createStockModal" tabindex="-1" role="dialog" aria-labelledby="createStockModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createStockModalLabel">Yeni Stok Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditStock" method="post">
+                    <input type="hidden" asp-for="Id"/>
+                    <div class="form-group">
+                        <label for="StockStockClassIdClass">Stok Sınıfı</label>
+                        <select asp-for="StockClassId" asp-items="ViewBag.GetStockClass" class="form-control">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="StockClassId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="StockTypeId">Stok Türü</label>
+                        <select asp-for="StockTypeId" asp-items="ViewBag.GetStockType" class="form-control">
+                            <option value="">Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="StockTypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="StockUnitId">Stok Birim Adı</label>
+                        <select asp-for="StockUnitId" asp-items="ViewBag.GetUnitCode" class="form-control">
+                            <option value="">Bu alan gereklidir</option>
+                        </select>
+                        <span asp-validation-for="StockUnitId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Quantity">Miktar</label>
+                        <input asp-for="Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="ShelfInformation">Raf Bilgisi</label>
+                        <input asp-for="ShelfInformation" class="form-control" />
+                        <span asp-validation-for="ShelfInformation" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="CabinetInformation">Dolap Bilgisi</label>
+                        <input asp-for="CabinetInformation" class="form-control" />
+                        <span asp-validation-for="CabinetInformation" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="CriticalQuantity">Kritik Miktar</label>
+                        <input asp-for="CriticalQuantity" class="form-control" />
+                        <span asp-validation-for="CriticalQuantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="IsActive">Aktif mi?</label>
+                        <input asp-for="IsActive" type="checkbox" class="form-check-input" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
