@@ -20,46 +20,85 @@ namespace StockManagementSystem.Business.Concrete
 
         public void Add(StockType stockType)
         {
-            //if(_stockTypeRepository.GetByName(stockType.Name) != null)
-            //{
-            //    throw new Exception("Bu isimde bir stok türü zaten mevcut.");
-            //}
-            _stockTypeRepository.Add(stockType);
+            try
+            {
+                _stockTypeRepository.Add(stockType);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok türü ekleme işlemi sırasında bir hata oluştu.");
+            }
         }
 
         public void Delete(int id)
         {
-            var stockType = _stockTypeRepository.Get(st => st.Id == id);
-            if(stockType == null)
+            try
             {
-                throw new Exception("Silinecek stok türü bulunamadı.");
+                var stockType = _stockTypeRepository.Get(st => st.Id == id);
+                if (stockType == null)
+                {
+                    throw new Exception("Silinecek stok türü bulunamadı.");
+                }
+                _stockTypeRepository.Delete(stockType);
             }
-            _stockTypeRepository.Delete(stockType);
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok türü silme işlemi sırasında bir hata oluştu.");
+            }
         }
 
         public List<StockType> GetAll()
         {
-            return _stockTypeRepository.GetList();
+            try
+            {
+                return _stockTypeRepository.GetList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok türleri listeleme işlemi sırasında bir hata oluştu.");
+            }
         }
 
         public StockType GetById(int id)
         {
-            return _stockTypeRepository.Get(st => st.Id == id);
+            try
+            {
+                return _stockTypeRepository.Get(st => st.Id == id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok türü getirme işlemi sırasında bir hata oluştu.");
+            }
         }
 
         public StockType GetByName(string name)
         {
-            return _stockTypeRepository.GetByName(name);
+            try
+            {
+                return _stockTypeRepository.GetByName(name);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok türünun ismini getirme işlemi sırasında bir hata oluştu.");
+            }
         }
 
         public void Update(StockType stockType)
         {
-            //var existingStockType = _stockTypeRepository.GetById(stockType.Id);
-            //if(existingStockType == null)
-            //{
-            //    throw new Exception("Güncellenecek stok türü bulunamadı.");
-            //}
-            _stockTypeRepository.Update(stockType);
+            try
+            {
+                _stockTypeRepository.Update(stockType);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok türü güncelleme işlemi sırasında bir hata oluştu.");
+            }
         }
     }
 }

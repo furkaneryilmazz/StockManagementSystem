@@ -2,7 +2,7 @@
 
 namespace StockManagementSystem.Domain.Aspects
 {
-    // bu attribute  loglama işlemleri için kullanılacak
+    // bu attribute  loglama işlemleri için kullanılacak unutma
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public class LogAspect : Attribute
     {

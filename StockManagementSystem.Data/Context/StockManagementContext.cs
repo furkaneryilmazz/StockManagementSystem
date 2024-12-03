@@ -24,7 +24,7 @@ namespace StockManagementSystem.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Varsa özel konfigurasyon ayarları
+            // varsa özel konfigurasyon ayarları yazıldı
             modelBuilder.Entity<Stock>()
                 .HasOne(s => s.StockType)
                 .WithMany()

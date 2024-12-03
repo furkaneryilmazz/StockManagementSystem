@@ -29,38 +29,100 @@ namespace StockManagementSystem.Business.Concrete
         [LogAspect("Stok birimi ekleme işlemi başladı.")]
         public void Add(StockUnit stockUnit)
         {
-            _stockUnitRepository.Add(stockUnit);
-            Console.WriteLine("Stok Birimi eklendi.");
+            try
+            {
+                _stockUnitRepository.Add(stockUnit);
+                Console.WriteLine("Stok Birimi eklendi.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok birimi ekleme işlemi sırasında bir hata oluştu.");
+            }
+
         }
 
         public void Delete(int id)
         {
-           _stockUnitRepository.Delete(GetById(id));
+            try
+            {
+                _stockUnitRepository.Delete(GetById(id));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok birimi silme işlemi sırasında bir hata oluştu.");
+            }
         }
 
         public List<StockUnit> GetAll()
         {
-            return _stockUnitRepository.GetList();
+            try
+            {
+                Console.WriteLine("Stok Birimi listelendi.");
+                return _stockUnitRepository.GetList();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok birimleri alınırken bir hata oluştu.");
+            }
         }
 
         public List<StockUnit> GetAllIncludingStockQuantityType()
         {
-            return _stockUnitRepository.GetAllIncludingStockQuantityType();
+            try
+            {
+                return _stockUnitRepository.GetAllIncludingStockQuantityType();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok birimlerini stok miktarları ile alınırken bir hata oluştu.");
+            }
         }
 
         public List<StockUnit> GetAllIncludingStockType()
         {
-            return _stockUnitRepository.GetAllIncludingStockType();
+            try
+            {
+                return _stockUnitRepository.GetAllIncludingStockType();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok birimlerini stok tipleri ile alınırken bir hata oluştu.");
+            }
         }
 
         public StockUnit GetById(int id)
         {
-            return _stockUnitRepository.Get(x => x.Id == id);
+            try
+            {
+                return _stockUnitRepository.Get(x => x.Id == id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok birimi alınırken bir hata oluştu.");
+            }
         }
 
+        [LogAspect("Stok birimi güncelleme işlemi başladı.")]
         public void Update(StockUnit stockUnit)
         {
-            _stockUnitRepository.Update(stockUnit);
+            try
+            {
+                _stockUnitRepository.Update(stockUnit);
+                Console.WriteLine("Stok Birimi güncellendi.");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok birimi güncelleme işlemi sırasında bir hata oluştu.");
+            }
         }
     }
 }

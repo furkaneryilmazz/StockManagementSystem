@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using StockManagementSystem.Business.Abstract;
 using StockManagementSystem.Business.Concrete;
 using StockManagementSystem.Data.Abstract;
@@ -28,14 +29,22 @@ builder.Services.AddScoped<IStockCurrencyUnitRepository, StockCurrencyUnitReposi
 builder.Services.AddScoped<IStockClassService, IStockClassManager>();
 builder.Services.AddScoped<IStockClassRepository, StockClassRepository>();
 
+
+builder.Host.UseSerilog((ctx, lc) => lc
+.WriteTo.Console().WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Error/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+else
+{
+    app.UseDeveloperExceptionPage(); 
 }
 
 app.UseHttpsRedirection();

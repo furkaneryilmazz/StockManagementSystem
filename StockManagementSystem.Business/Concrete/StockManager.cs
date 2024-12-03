@@ -21,21 +21,46 @@ namespace StockManagementSystem.Business.Concrete
 
         public void Add(Stock stock)
         {
-            _stockRepository.Add(stock);
+            try
+            {
+                _stockRepository.Add(stock);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok ekleme islemi sirasinda bir hata olustu.");
+            }
         }
 
         public void Delete(int id)
         {
-            var stock = GetById(id);
-            if(stock != null)
+            try
             {
-                _stockRepository.Delete(stock);
+                var stock = GetById(id);
+                if (stock != null)
+                {
+                    _stockRepository.Delete(stock);
+                }
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok silme islemi sirasinda bir hata olustu.");
+            }
+
         }
 
         public List<Stock> GetAll()
         {
-            return _stockRepository.GetList();
+            try
+            {
+                return _stockRepository.GetList();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stoklar alınırken bir hata oluştu.");
+            }
         }
 
         public List<Stock> GetAllIncludingStock()
@@ -45,12 +70,29 @@ namespace StockManagementSystem.Business.Concrete
 
         public Stock GetById(int id)
         {
-            return _stockRepository.Get(x => x.Id == id);
+            try
+            {
+                return _stockRepository.Get(x => x.Id == id);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok alınırken bir hata oluştu.");
+            }
+
         }
 
         public void Update(Stock stock)
         {
-            _stockRepository.Update(stock);
+            try
+            {
+                _stockRepository.Update(stock);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hata: {ex.Message}");
+                throw new Exception("Stok guncelleme islemi sirasinda bir hata olustu.");
+            }
         }
     }
 }

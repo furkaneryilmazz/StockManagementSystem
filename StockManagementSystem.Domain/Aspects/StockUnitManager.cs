@@ -13,5 +13,11 @@ namespace StockManagementSystem.Domain.Aspects
         {
             Console.WriteLine("Stok birimi eklendi.");
         }
+
+        [LogAspect("Stok birimi ekleme islemi baslatildi.")]
+        public void Update()
+        {
+            Console.WriteLine("Stok birimi güncellendi.");
+        }
     }
 }

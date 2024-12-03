@@ -38,6 +38,7 @@ namespace StockManagementSystem.WebUI.Controllers
             ViewBag.GetStockClass = GetStockClass();
             ViewBag.GetUnitCode = GetUnitCode();
             ViewBag.GetStockType = GetStockType();
+
             return View(stocks);
         }
 
